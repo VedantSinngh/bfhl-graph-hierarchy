@@ -68,38 +68,51 @@ Returns `{ "operation_code": 1 }` — health check.
 
 ---
 
-## Deploy to Render (Backend)
+## 🚀 Deploy to GitHub + Vercel
 
-1. Push the repo to GitHub.
-2. Go to [render.com](https://render.com) → **New Web Service**.
-3. Connect your repository.
-4. Set **Root Directory** to `backend`.
-5. **Build Command**: `npm install`
-6. **Start Command**: `npm start`
-7. Set **Environment**: `NODE_ENV=production`
-8. Copy your Render URL (e.g. `https://bfhl-backend.onrender.com`).
+If you want to deploy BOTH the frontend and backend on Vercel, use the instructions below. 
+Both will be created as separate projects stemming from the same GitHub repository.
 
-> **Then** open `frontend/index.html`, find the `API_URL` variable and replace `YOUR-BACKEND-URL`:
-> ```js
-> : 'https://YOUR-BACKEND-URL.onrender.com/bfhl'
-> ```
+### Step 1 — Push to GitHub
+
+Run these commands in your root terminal (`Bajaj-Finserv/`):
+```bash
+git init
+git add .
+git commit -m "Initial commit"
+git remote add origin https://github.com/VedantSinngh/bfhl-graph-hierarchy.git
+git branch -M main
+git push -u origin main
+```
+*(You've already set up the repo correctly as seen in your local terminal!)*
 
 ---
 
-## Deploy Frontend to Vercel
+### Step 2 — Deploy Backend to Vercel
 
-```bash
-npm i -g vercel
-cd frontend
-vercel --prod
-```
+1. Go to **vercel.com** → **Add New Project**.
+2. Select your repository: `bfhl-graph-hierarchy`.
+3. In the Configuration screen:
+   - Expand **Root Directory** and pick `backend`.
+4. Leave everything else as default and hit **Deploy**.
+5. Once complete, click on the **Dashboard** and copy the assigned domain URL (e.g., `https://bfhl-graph-hierarchy-backend.vercel.app`).
 
-Vercel will serve `index.html` as a static site. No build step required.
+---
 
-### Or Netlify (Drag & Drop)
-1. Go to [app.netlify.com](https://app.netlify.com) → **Sites** → **Add new site** → **Deploy manually**.
-2. Drag the `frontend/` folder into the drop zone.
-3. Done — Netlify gives you a live URL instantly.
+### Step 3 — Deploy Frontend to Vercel
+
+1. Go back to your Vercel Dashboard → **Add New Project**.
+2. Select the same repository again: `bfhl-graph-hierarchy`.
+3. In the Configuration screen:
+   - Expand **Root Directory** and pick `frontend`.
+   - The Framework Preset should auto-detect as **Vite**.
+4. Open the **Environment Variables** drop-down:
+   - Add `VITE_API_BASE_URL` 
+   - Paste the backend URL from Step 2 (e.g., `https://bfhl-graph-hierarchy-backend.vercel.app`).
+   > ⚠️ Make sure there is **no `/bfhl`** at the end of the URL.
+5. Hit **Deploy**.
+
+Done! Your frontend builds statically, and your backend functions run as Vercel Serverless endpoints automatically because of the `vercel.json` config inside the backend directory.
 
 ---
 
