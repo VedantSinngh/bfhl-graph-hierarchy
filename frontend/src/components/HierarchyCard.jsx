@@ -19,11 +19,8 @@ export default function HierarchyCard({ hierarchy }) {
       <div className={styles.body}>
         {isCycle ? (
           <div className={styles.cyclePlaceholder}>
-            <span className={styles.cycleIcon}>⟳</span>
-            <span>Cyclic group — no acyclic tree structure</span>
-            <span className={styles.cycleRoot}>
-              Root (lex. smallest): <strong>{hierarchy.root}</strong>
-            </span>
+            <span style={{ color: '#ef4444', fontWeight: '500' }}>⚠️ Cycle Detected</span>
+            <span style={{ fontSize: '0.8rem', opacity: 0.7 }}>Tree rendering disabled due to closed loop</span>
           </div>
         ) : (
           <TreeVisualizer tree={hierarchy.tree} />
