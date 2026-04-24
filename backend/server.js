@@ -177,9 +177,9 @@ app.post('/bfhl', (req, res) => {
     }
     const result = processData(data.map(String));
     return res.status(200).json({
-      user_id: 'yourname_ddmmyyyy',
-      email_id: 'your@email.com',
-      college_roll_number: 'YOURROLL',
+      user_id: 'vedant_singh_21042005',
+      email_id: 'vs9239@srmist.edu.in',
+      college_roll_number: 'RA2311026010436',
       ...result,
     });
   } catch (err) {
